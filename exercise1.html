@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue JS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="exercise">
+        <p>VueJS is pretty easy for now! {{ YOUR_NAME }} ({{ YOUR_AGE }})</p>
+        <p>{{ YOUR_AGE * 3 }}</p>
+        <p>{{ generateRandomNum() }}</p>
+        <div>
+            <img v-bind:src="link" alt="asd">
+        </div>
+        <div>
+            <input type="text" v-on:input="showMyChange">
+            <p>{{ showMyText }}</p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#exercise",
+            data: {
+                YOUR_NAME: 'Ammu',
+                YOUR_AGE: 28,
+                link: 'https://vuejs.org/images/logo.png',
+                showMyText: 'haha'
+            },
+            methods: {
+                generateRandomNum() {
+                    return Math.random();
+                },
+                showMyChange(event) {
+                    this.showMyText = event.target.value;  
+                }
+            }
+        })
+    </script>
+</body>
+</html>

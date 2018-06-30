@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exercise 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>Current Value: {{ value }}</p>
+        <button @click="value += 5">Add 5</button>
+        <button @click="value += 1">Add 1</button>
+        <p>{{ result }}</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                value: 0,
+                timeSecond: 0
+            },
+            computed: {
+                result() {
+                    if (this.value >= 37) {
+                        return this.value;
+                    }
+
+                    return null;
+                }
+            },
+            watch: {
+                result() {
+                    var vm = this;
+                    setTimeout(() => {
+                        vm.value = 0;
+                    }, 5000);
+                }
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+</html>

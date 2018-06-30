@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exercise 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+    <style>
+        #effect {
+            height: 100px;
+            border: 1px solid black;
+        }
+        .highlight {
+            background-color: red;
+            width: 200px;
+        }
+        .shrink {
+            background-color: gray;
+            width: 50px;
+        }
+        .round {
+            margin: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        .changeColorRed {
+            background-color: red;
+        }
+        .changeColorGreen {
+            background-color: green;
+        }
+        .progressBar {
+            width: 500px;
+            height: 50px;
+            border: 1px solid black;
+        }
+        .innerBar {
+            height: 50px;
+            background-color: blueviolet;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button @click="startEffect">Start Effect</button>
+            <div id="effect" :class="altClasses"></div>
+        </div>
+        <div @mousemove="setDivPosition" style="width: 500px;height: 500px;border: 1px dotted red">
+            <p>Cursor Postion - X: {{ cursorX }} Y: {{ cursorY }}</p>
+            <div :class="[round, { changeColorRed: this.altEffect, changeColorGreen: !this.altEffect }]" :style="myStyle"></div>
+        </div>
+        <div>
+            <input type="text" v-model="userClass">
+            <input type="text" v-model="secondInput">
+            <div :class="[userClass, { changeColorRed: this.secondInput == 'true', changeColorGreen: this.secondInput == 'false' }]"></div>
+        </div>
+        <div>
+            <input type="text" v-model="userColor">
+            <div class="round" :style="changeUserColor"></div>
+        </div>
+        <div>
+            <button @click="startProgress">Start Progress</button>
+            <p>{{ barWidth }}</p>
+            <div class="progressBar">
+                <div class="innerBar" :style="startProgressBar"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                altEffect: false,
+                cursorX: 0,
+                cursorY: 0,
+                round: "round",
+                userClass: '',
+                secondInput: '',
+                userColor: '',
+                barWidth: 0
+            },
+            computed: {
+                startProgressBar() {
+                    return {
+                        width: this.barWidth + 'px'
+                    }
+                },
+                altClasses() {
+                    return {
+                        highlight: this.altEffect,
+                        shrink: !this.altEffect
+                    };
+                },
+                bindCursorToDiv() {
+                    return [round, { changeColorRed: this.altEffect, changeColorGreen: !this.altEffect }]
+                },
+                myStyle() {
+                    return {
+                        'left': this.cursorX + 'px',
+                        'top': this.cursorY + 'px'
+                    };
+                },
+                changeUserColor() {
+                    return {
+                        'background-color': this.userColor
+                    }
+                }
+            },
+            methods: {
+                startEffect() {
+                    var vm = this;
+                    setInterval(() => {
+                        vm.altEffect = !vm.altEffect
+                    }, 1000)
+                },
+                setDivPosition(event) {
+                    this.cursorX = event.clientX;
+                    this.cursorY = event.clientY;
+                },
+                startProgress() {
+                    var vm = this;
+                    setInterval(() => {
+                        if (vm.barWidth > 500) {
+                            return;
+                        }
+
+                        vm.barWidth += 1;
+                    }, 200)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

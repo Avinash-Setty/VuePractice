@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fun 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="show">You can see me</p>
+        <p v-else>Haha! I see</p>
+        <template v-if="show">
+            <p>Group the element</p>
+            <p>template will not appear in DOM</p>
+        </template>
+        <button @click="show = !show">Click to see</button>
+        <div v-show="show">
+            <p>Use v-show if you want to hide the element in DOM</p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                show: true
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+</html>

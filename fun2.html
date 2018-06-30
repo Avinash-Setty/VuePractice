@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fun 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <h3>{{ name }}</h3>
+        <div>
+            <button v-on:click="counter++">Increase</button>
+            <button v-on:click="counter--">Decrease</button>
+            <p>Counter:{{ counter }} | SecondCounter:{{ secondCounter }}</p>
+            <button v-on:click="secondCounter++">Increase Second</button>
+            <p>Result: {{ result() }} | {{ output }}</p>
+            <p>Seconds: {{ numberOfSeconds }}</p>
+        </div>
+        <div>
+            <p>Shorthands</p>
+            <button @click="counter++">Increase</button>
+            <button @click="counter--">Decrease</button>
+            <p>: is shorthand to v-bind:</p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                name: 'Ammu',
+                counter: 0,
+                secondCounter: 0,
+                numberOfSeconds: 0
+            },
+            watch: {
+                counter(value) {
+                    var vm = this;
+                    setTimeout(() => {
+                        vm.counter = 0;
+                    }, 5000);
+                }
+            },
+            computed: {
+                output() {
+                    console.log('Computed');
+                    return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+                }
+            }, 
+            methods: {
+                result() {
+                    console.log('Method');
+                    return this.counter > 5 ? 'Greater 5' : 'Smaller than 5'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

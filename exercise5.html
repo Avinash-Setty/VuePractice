@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exercise 5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button @click="show = !show">Toggle</button>
+            <p v-if="show">You either see me</p>
+            <p v-show="!show">.. or me</p>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li v-for="(item,i) in items">{{ item }} - {{ i }}</li>
+            </ul>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li v-for="(value,key) in random">{{ key }} - {{ value }}</li>
+            </ul>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li v-for="(value,key) in nested">
+                    <template v-if="key == 'data'">
+                        <ul>
+                            <li v-for="v in value">{{v}}</li>
+                        </ul>
+                    </template>
+                    <div v-else>{{ value }}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                show: false,
+                items: ['wipes', 'diaper', 'stroller', 'car seat'],
+                random: {
+                    title: 'Lord of rings',
+                    author: 'Tolkiens',
+                    books: 3
+                },
+                nested: {
+                    name: 'TestObject',
+                    data: [1.67, 1.11, 1.3]
+                }
+            },
+            methods: {
+                
+            }
+        });
+    </script>
+</body>
+</html>

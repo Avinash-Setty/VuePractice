@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fun 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="Increment" v-on:click="incrementCounter(2, $event)">
+        <input type="button" value="+" v-on:click="cnt++">
+        <p>{{ cnt }}</p>
+        <p v-on:mousemove="updateCoords">
+            {{ x }} / {{ y }}
+            - <span v-on:mousemove="DontUpdateCoords">DEAD SPOT</span>
+            - <span v-on:mousemove.stop="">Another DEAD SPOT</span>
+        </p>
+        <input type="text" v-on:keyup.enter.space="alertMe">
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                cnt: 0,
+                x: 0,
+                y: 0
+            },
+            methods: {
+                incrementCounter(step, event) {
+                    this.cnt = this.cnt + step;
+                },
+                updateCoords(event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                },
+                DontUpdateCoords(event) {
+                    event.stopPropagation();
+                },
+                alertMe() {
+                    alert('Entered enter or space');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

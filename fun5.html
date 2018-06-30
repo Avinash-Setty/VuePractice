@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fun 5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="fruits.push('dummy')">Add dummy</button>
+        <ul>
+            <li v-for="(fruit, i) in fruits" :key="fruit">{{ fruit }} - {{ i }}</li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="person in persons">
+                <span>Name: {{ person.name }}</span>
+                <span>(Age: {{ person.age }})</span>
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key, i) in person">{{ key }} : {{ value }} ({{ i }})</div>
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="n in 5">{{ n }}</li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="n in 'abc'">{{ n }}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                fruits: ['apple', 'mango', 'banana'],
+                persons: [
+                    {name: 'Ammu', age: 28},
+                    {name: 'Apple', age: 0},
+                    {name: 'Avi', age: 33}
+                ]
+            },
+            methods: {
+                
+            }
+        });
+    </script>
+</body>
+</html>
